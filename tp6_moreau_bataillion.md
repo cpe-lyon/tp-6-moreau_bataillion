@@ -34,7 +34,7 @@ Aller dans `/etc/fstab` et rajouter une ligne par partition :
 1ère colonne: nom de la partition à monter  
 2ème colonne: nom du point de montage  
 3ème colonne: système de fichier utilisé (ext4, ntfs...)  
-Attention il faut créer /win et /data.  
+Attention: il faut créer /win et /data.  
 
 **7. Utilisez la commande mount puis redémarrez votre VM pour valider la configuration**  
 Pour forcer la prise en compte des modification de la fstab : `mount -a`.  
@@ -42,7 +42,7 @@ Pour forcer la prise en compte des modification de la fstab : `mount -a`.
 **8. Montez votre clé USB dans la VM**  
 Dans config, usb, on rajoute un filtre usb vide, ce qui va permettre de lire tous les périphériques usb branchés.  
 Avec `sudo fdisk -l` on constate qu’il s’est bien rajouté une clef (sdc1) lorsqu’on branche une clef à la machine hôte.  
-On va créer un point de montage pour la clef. On crée le dossier `/media/usb` comme dossier de montage et on monte la clef grâce à `mount /dev/sdc1 /media/usb`
+On va créer un point de montage pour la clef. On crée le dossier `/media/usb` comme dossier de montage et on monte la clef grâce à `mount /dev/sdc1 /media/usb`.
 
 
 **9. Créez un dossier partagé entre votre VM et votre système hôte (rem. il peut être nécessaire d’installer les Additions invité de VirtualBox**  
