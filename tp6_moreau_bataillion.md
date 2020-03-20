@@ -22,9 +22,24 @@ On formate les partitions dans leur format choisi (ext4 et ntfs):
 `sudo mkfs.ext4 /dev/sdb1`
 `sudo mkfs.ntfs /dev/sdb2`  
 
-**5. Pourquoi la commande df -T, qui affiche le type de système de fichier des partitions, ne fonctionne-telle pas sur notre disque ?**  
+**5. Pourquoi la commande df -T, qui affiche le type de système de fichier des partitions, ne fonctionne-telle pas sur notre disque ?** 
+`df -T` n’affiche pas sdb1 ni sdb2. Hypothèse : les partitions ne seront pas prises en compte jusqu’à ce qu’elles soient montées.  
+
 **6. Faites en sorte que les deux partitions créées soient montées automatiquement au démarrage de la machine, respectivement dans les points de montage /data et /win (vous pourrez vous passer des UUID en raison de l’impossibilité d’effectuer des copier-coller)**  
+Aller dans `/etc/fstab` et rajouter une ligne par partition :  
+1ère colonne: nom de la partition à monter  
+2ème colonne: nom du point de montage  
+3ème colonne: système de fichier utilisé (ext4, ntfs...)  
+Attention il faut créer /win et /data.  
+
 **7. Utilisez la commande mount puis redémarrez votre VM pour valider la configuration**  
+Pour forcer la prise en compte des modification de la fstab : `mount -a`.  
+
 **8. Montez votre clé USB dans la VM**  
+Dans config, usb, on rajoute un filtre usb vide, ce qui va permettre de lire tous les périphériques usb branchés.  
+Avec `sudo fdisk -l` on constate qu’il s’est bien rajouté une clef (sdc1) lorsqu’on branche une clef à la machine hôte.  
+On va créer un point de montage pour la clef. On crée le dossier `/media/us`b comme dossier de montage et on monte la clef grâce à `mount /dev/sdc1 /media/usb`
+
+
 **9. Créez un dossier partagé entre votre VM et votre système hôte (rem. il peut être nécessaire d’installer les Additions invité de VirtualBox**  
 
