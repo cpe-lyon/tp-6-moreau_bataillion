@@ -83,4 +83,22 @@ Ensuite, dans le fichier /etc/default/grub, on ajoute la ligne GRUB_BACKGROUND=/
 Faire `update-grub` pour prendre en compte les modifs.  
 Redémarrer la VM : le menu GRUB a un fond d'écran!  
 
+**7. Il est également possible de configurer des thèmes. On en trouve quelques uns dans les dépôts (grub2-themes-*). 
+Installez-en un.**  
+`apt install grub2-themes-*` pour télécharger les thèmes.  
+Dans /etc/default/grub, ajouter: GRUB_THEME=”boot/grub/themes/ubuntu-mate/theme.txt”  
+
+**8. Ajoutez une entrée permettant d’arrêter la machine, et une autre permettant de la redémarrer.**  
+On ajoute ces lignes au fichier /etc/grub.d/40_custom :  
+```
+menuentry 'Arrêt du système' { 
+	halt 
+} 
+menuentry 'Redémarrage du système' { 
+	reboot 
+}
+```
+https://doc.ubuntu-fr.org/tutoriel/grub2_parametrage_manuel
+
+
 
