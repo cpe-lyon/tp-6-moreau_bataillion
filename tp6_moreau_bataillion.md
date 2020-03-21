@@ -98,7 +98,9 @@ menuentry 'Redémarrage du système' {
 	reboot 
 }
 ```
-https://doc.ubuntu-fr.org/tutoriel/grub2_parametrage_manuel
+https://doc.ubuntu-fr.org/tutoriel/grub2_parametrage_manuel#menu_arret_du_systeme
+
+**9. Configurer GRUB pour que le clavier soit en français**
 
 
 
