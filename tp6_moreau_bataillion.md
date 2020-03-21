@@ -57,16 +57,25 @@ Evidemment, seuls les scripts exécutables sont pris en compte.
 Sous Ubuntu Server, GRUB prend aussi en compte les fichiers d’extension .cfg présents dans /etc/default/grub.d. En particulier, sur les versions récentes, le fichier de configuration 50-curtin-settings.cfg donne à la variable GRUB_TERMINAL la valeur console, ce qui désactive tous les paramètres liés aux fonds d’écran, thèmes, certaines résolutions, etc.**  
 
 **1. Commencez par changer l’extension du fichier /etc/default/grub.d/50-curtin-settings.cfg s’il est présent dans votre environnement (vous pouvez aussi commenter son contenu).**  
+On n'a pas le fichier /etc/default/grub.d/50-curtin-settings.cfg, donc on ne le modifie pas. Ce fichier est utilisé au démarrage par GRUB pour interdire tout contenu graphique dans la console. Cela empêcherait par exemple de mettre en place un fond d'écran. Pour que le fichier ne soit pas pris en considération par GRUB il suffit de changer son extension : il n'est alors pas exécuté au démarrage.
 
 **2. Modifiez le fichier /etc/default/grub pour que le menu de GRUB s’aﬀiche pendant 10 secondes; passé ce délai, le premier OS du menu doit être lancé automatiquement.**  
+Dans /etc/default/grub : passer GRUB_TIMEOUT_STYLE=menu et GRUB_TIMEOUT=10. Le premier indique que l'on doit afficher le menu de GRUB (choix de lancement d'une distribution), le second indique le temps alloué à l'utilisateur pour faire son choix avant que l'OS par défaut ne soit lancé.
 
-**3. Lancez la commande update-grub.  
+**3. Lancez la commande `update-grub`.  
 Cette commande fait appel au script grub-mkconfig qui construit le fichier de configuration ”final” de GRUB (/boot/grub/grub.cfg) à partir du fichier de paramètres et des scripts.**  
 
 **4. Redémarrez votre VM pour valider que les changements ont bien été pris en compte.  
-Pensez à lancer la commande update-grub après chaque modification de la configuration de GRUB!**  
+Pensez à lancer la commande `update-grub` après chaque modification de la configuration de GRUB!**  
+Après redémarrage de la VM, on a bien accès au menu de choix d'OS pendant 10s.
 
 **5. On va augmenter la résolution de GRUB et de notre VM. Cherchez sur Internet le ou les paramètres à rajouter au fichier grub.**  
+Au démarrage de la VM, appuyer sur c lors de l'affichage du menu GRUB pour accéder à la ligne de commande grub. Faire `vbeinfo` pour découvrir la plus grande résolution possible pour notre machine (il s'agit de la dernière ligne: 1152x864x32). Faire echap pour quitter cet invite de commande.  
+Dans /etc/default/grub : décommenter la ligne GRUB_GFXMODE (résolution du menu grub) et mettre la résolution précédemment trouvée. 
+Puis, ajouter la ligne GRUB_GFXPAYLOAD_LINUX (résolution VM linux) avec la même résolution.  
+Faire `update-grub` pour prendre en compte les modifs.  
+Redémarrer VM : la fenêtre a changé de taille !  
+
 
 **6. On va à présent ajouter un fond d’écran. Il existe un paquet en proposant quelques uns: grub2-splashimages (après installation, celles-ci sont disponibles dans /usr/share/images/grub).**  
 
