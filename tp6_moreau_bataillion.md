@@ -74,13 +74,13 @@ Au démarrage de la VM, appuyer sur c lors de l'affichage du menu GRUB pour acc�
 Dans /etc/default/grub : décommenter la ligne GRUB_GFXMODE (résolution du menu grub) et mettre la résolution précédemment trouvée. 
 Puis, ajouter la ligne GRUB_GFXPAYLOAD_LINUX (résolution VM linux) avec la même résolution.  
 Faire `update-grub` pour prendre en compte les modifs.  
-Redémarrer VM : la fenêtre a changé de taille !  
+Redémarrer la VM : la fenêtre a changé de taille !  
 
 
 **6. On va à présent ajouter un fond d’écran. Il existe un paquet en proposant quelques uns: grub2-splashimages (après installation, celles-ci sont disponibles dans /usr/share/images/grub).**  
-
-
-
-
+`sudo apt install grub2-splashimages`pour installer le paquet d'image.
+Ensuite, dans le fichier /etc/default/grub, on ajoute la ligne GRUB_BACKGROUND=/usr/share/images/grub/Apollo_17_The_Last_Moon_Shot_Edit1.tga  
+Faire `update-grub` pour prendre en compte les modifs.  
+Redémarrer la VM : le menu GRUB a un fond d'écran!  
 
 
