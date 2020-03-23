@@ -157,7 +157,7 @@ make install	//installation de hello.c
 ```
 modprobe -a hello		//charger le module avec ses dépendances
 tail /var/log/syslog		//Regarder le journal du noyau : on voit que init_module() a bien été déclenché
-lsmod | grep hello   		//lsmod liste les modules chargés dans la VM, avec grep on ne sélectionne que le module hello. Le 				    module ayant chargé, il est bien présent dans la liste
+lsmod | grep hello   		//lsmod liste les modules chargés dans la VM, avec grep on ne sélectionne que le module hello. Le  				    module ayant chargé, il est bien présent dans la liste
 ```
 
 **6. Utilisez la commande modinfo pour obtenir des informations sur le module hello.ko; vous devriez notamment voir les informations figurant dans le fichier C.**  
