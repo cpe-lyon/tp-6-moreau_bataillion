@@ -167,7 +167,7 @@ lsmod | grep hello   		//lsmod liste les modules chargés dans la VM, avec grep 
 ```
 modprobe -r hello		//décharger le module avec ses dépendances
 tail /var/log/syslog		//Regarder le journal du noyau : on voit que cleanup_module() a bien été déclenché
-lsmod | grep hello   		//lsmod liste les modules chargés dans la VM, avec grep on ne sélectionne que le module hello. Le 				    module ayant déchargé, il est absent de la liste
+lsmod | grep hello   		//lsmod liste les modules chargés dans la VM, avec grep on ne sélectionne que le module hello. Le module ayant été déchargé, il est absent de la liste
 ```
 
 **8. Pour que le module soit chargé automatiquement au démarrage du système, il faut l’inscrire dans le fichier /etc/modules. Essayez, et vérifiez avec la commande lsmod après redémarrage de la machine.**  
