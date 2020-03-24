@@ -236,5 +236,22 @@ Après un `sudo reboot`, le message s'inscrit bien lors d'une connexion.
 **8. Ecrivez un script bash qui permet de calculer le k-ième nombre de Fibonacci : Fk = Fk−1 + 
 Fk−2, avec F0 = F1 = 1.  
 Lancez le calcul de F100 puis lancez la commande tload depuis un autre terminal virtuel. Que constatez-vous?   Interrompez ensuite le calcul avec CTRL+C et observez la conséquence sur l’aﬀichage de tload.**  
-
+Dans /Documents/Fibonacci.sh:  
+```
+F0=0;
+F1=1;
+for i in `seq 1 100000`; 
+	do 
+		F2=$F1+$F0;
+		F0=$F1;
+		F1=$F2; 
+	done
+echo $F2;
+```
+La commande `tload` permet d'obtenir une représentation graphique de la charge moyenne du système.  
+On compile avec chmod u+x fibonacci.sh. On lance le script avec ./fibonacci.sh.  
+On passe dans le terminal 2 avec CTRL + ALT +F2 et on lance `tload`.  
+On repasse dans le terminal 1 (CTRL + ALT + F1) et on arrête le processus avec CTRL + C  
+On repasse dans le terminal 2.  
+On peut observer que tant que le processus était actif, la charge moyenne du système augmentait très vite. Lorsqu'on a arrêté le processus, la charge est redescendue graduellement jusqu'à atteindre 0.  
 
