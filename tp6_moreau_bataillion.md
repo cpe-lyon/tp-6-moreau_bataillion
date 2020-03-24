@@ -255,3 +255,21 @@ On repasse dans le terminal 1 (CTRL + ALT + F1) et on arrête le processus avec 
 On repasse dans le terminal 2.  
 On peut observer que tant que le processus était actif, la charge moyenne du système augmentait très vite. Lorsqu'on a arrêté le processus, la charge est redescendue graduellement jusqu'à atteindre 0.  
 
+## Exercice 6. Interception de signaux  
+
+**La commande interne trap permet de redéfinir des gestionnaires pour les signaux reçus par un processus. Un cas d’utilisation typique est la suppression des fichiers temporaires créés par un script lorsque celui-ci est interrompu.**  
+
+**1. Commencez par écrire un script qui recopie dans un fichier tmp.txt chaque ligne saisie au clavier par l’utilisateur**  
+
+**2. Lancez votre script et appuyez sur CTRL+Z. Que se passe-t-il? Comment faire pour que le script poursuive son exécution?**  
+
+**3. Toujours pendant l’exécution du script, appuyez sur CTRL+C. Que se passe-t-il?**  
+
+**4. Modifiez votre script pour redéfinir les actions à effectuer quand le script reçoit les signaux SIGTSTP (= CTRL+Z) et SIGINT (= CTRL+C) : dans le premier cas, il doit aﬀicher ”Impossible de me placer en arrière-plan”, et dans le second cas, il doit aﬀicher ”OK, je fais un peu de ménage avant” avant de supprimer le fichier temporaire et terminer le script.**  
+
+**5. Testez le nouveau comportement de votre script en utilisant d’une part les raccourcis clavier, d’autre part la commande kill**  
+
+**6. Relancez votre script et faites immédiatement un CTRL+C : vous obtenez un message d’erreur vous indiquant que le fichier tmp.txt n’existe pas. A l’aide de la commande interne test, corrigez votre script pour que ce message n’apparaisse plus.**  
+
+
+
