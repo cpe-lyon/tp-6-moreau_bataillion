@@ -222,10 +222,11 @@ Si on fait `last tty2`, on voit la liste des connexions à tty2. Ici il n’y a 
 `journalctl` permet d’avoir accès au journal des log. Dans ces log, on a notamment des logs qui concernent l’allumage de la machine. A chaque allumage, la première ligne est constituée d’un rappel de la distribution linux de la machine. Il y a donc systématiquement marqué "Linux version". On fait donc un `grep` pour ne conserver que ces lignes qui correspondent à un allumage de machine.  
 De façon arbitraire, on décide de ne regarder que les 10 dernières connexions à la machine avec `tail`. La ligne étant un peu longue et inutile à conserver pour cet exercice, on fait un `cut` aux espaces et on ne conserve que les 3 premières colonnes qui correspondent à la date et à l’heure du log.
 
-Ou tout simplement après quelques recherches supplémentaires : `journal -list-boots | tail -10
+Ou tout simplement après quelques recherches supplémentaires : `journalctl --list-boots | tail -10`
 
 **6. Comment aﬀicher tout ce qu’il s’est passé sur la machine lors de l’avant-dernier boot?**  
-journalctl -S -2d -U today
+`journalctl -S -2d -U -1d`  
+Le -S signifie Since et le U Until. On remonte dans le temps avec -2d: -2day : il y a deux jours. On sélectionne les log entre il y a deux jours et il y a un jour, c'est à dire avant-hier.  
 
 **7. Faites en sortes que lors d’une connexion à la machine, les utilisateurs soient prévenus par un message à l’écran d’une maintenance le 26 mars à minuit.**  
 
