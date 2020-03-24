@@ -229,6 +229,9 @@ Ou tout simplement après quelques recherches supplémentaires : `journalctl --l
 Le -S signifie Since et le U Until. On remonte dans le temps avec -2d: -2day : il y a deux jours. On sélectionne les log entre il y a deux jours et il y a un jour, c'est à dire avant-hier.  
 
 **7. Faites en sortes que lors d’une connexion à la machine, les utilisateurs soient prévenus par un message à l’écran d’une maintenance le 26 mars à minuit.**  
+Editer le fichier /etc/motd (le créer si besoin): `sudo nano /etc/motd`. Ecrire : Maintenance le 26/03 à minuit!
+motd = Message Of The Day.
+Après un `sudo reboot`, le message s'inscrit bien lors d'une connexion.
 
 **8. Ecrivez un script bash qui permet de calculer le k-ième nombre de Fibonacci : Fk = Fk−1 + 
 Fk−2, avec F0 = F1 = 1.  
