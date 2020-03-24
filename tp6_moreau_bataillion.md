@@ -176,8 +176,14 @@ lsmod | grep hello   		//lsmod liste les modules chargés dans la VM, avec grep 
 ## Exercice 4: Exécution de commandes en différé : at et cron  
 
 **1. Programmez une tâche qui aﬀiche un rappel pour la réunion qui aura lieu dans 3 minutes. Vérifiez entre temps que la tâche est bien programmée.**  
+`echo ‘echo ”Réunion Rappel”’ | at now +3 minutes` : met en place le rappel  
+`atq` : affiche toutes les taches programmées dont celle précédente.  
+`atrm 1` : remove le job 1 (tâche 1 a effectuer retirée de la liste)  
 
 **2. Est-ce que le message s’est aﬀiché? Si la réponse est non, essayez de trouver la cause du problème (par exemple en vous aidant des logs, du manuel...)**  
+Ne marche pas selon le journal de log : `exec failed for mail command : No such file or directory`.  
+Il faut trouver le chemin de notre terminal actuel pour que le résultat de la commande arrive au bon endroit. Avec `tty`, on obtient `/dev/tty1`.  
+`echo ‘echo ”Réunion Rappel”’>/dev/tty1 | at now +3 minutes`  
 
 **3. Pour tester le fonctionnement de cron, commencez par programmer l’exécution d’une tâche simple, l’aﬀichage de “Il faut réviser pour l’examen!”, toutes les 3 minutes.**  
 
@@ -195,14 +201,26 @@ lsmod | grep hello   		//lsmod liste les modules chargés dans la VM, avec grep 
 ## Exercice 5: Surveillance de l’activité du système  
 
 **1. Dans la console virtuelle tty1, lancez la commande htop, puis tapez la commande w dans tty2. Qu’aﬀiche cette commande?**  
+`htop` permet de lister et gérer les processus en cours d’exécution.  
+Pour passer sous tty2 on fait : CTRL + ALT + F2.  
+La commande `w` affiche les différents terminaux tty ouverts (tty1 et tty2) ainsi que l'heure de login sur le terminal et l'utilisateur responsable du terminal. Il y a également plusieurs infos à propos du terminal (IDLE, JCPU, PCPU, WHAT).  
 
 **2. Comment aﬀicher l’historique des dernières connexions à la machine?**  
+La commande `last` permet d'afficher la liste des connexions utilisateur sur une machine.  
+Si on fait `last tty2`, on voit la liste des connexions à tty2. Ici il n’y a qu’une connexion et on peut voir qu’on y est toujours connecté.  
 
 **3. Quelle commande permet d’obtenir la version du noyau?**  
+`uname -r` : 5.3.0  
 
 **4. Comment récupérer toutes les informations sur le processeur, au format JSON?**  
+`lshw` est un programme permettant d'extraire des informations détaillées de la configuration matérielle de la machine.  
+`sudo lshw -json` : indique qu’on veut la sortie au format json  
+`sudo lshw -json >>info_proc.json` : permet de stocker la sortie dans un fichier  
 
 **5. Comment obtenir la liste des derniers démarrages de la machine avec la commande journalctl? Comment aﬀicher tout ce qu’il s’est passé sur la machine lors de l’avant-dernier boot?**  
+`journalctl | grep "Linux version" | tail -10 | cut -d » «  -f1-3`  
+`journalctl` permet d’avoir accès au journal des log. Dans ces log, on a notamment des logs qui concernent l’allumage de la machine. A chaque allumage, la première ligne est constituée d’un rappel de la distribution linux de la machine. Il y a donc systématiquement marqué "Linux version". On fait donc un `grep` pour ne conserver que ces lignes qui correspondent à un allumage de machine.  
+De façon arbitraire, on décide de ne regarder que les 10 dernières connexions à la machine avec `tail`. La ligne étant un peu longue et inutile à conserver pour cet exercice, on fait un `cut` aux espaces et on ne conserve que les 3 premières colonnes qui correspondent à la date et à l’heure du log.
 
 **6. Comment obtenir la liste des derniers démarrages de la machine avec la commande journalctl?**  
 
