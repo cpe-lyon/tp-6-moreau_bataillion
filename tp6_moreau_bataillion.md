@@ -173,3 +173,43 @@ lsmod | grep hello   		//lsmod liste les modules chargés dans la VM, avec grep 
 **8. Pour que le module soit chargé automatiquement au démarrage du système, il faut l’inscrire dans le fichier /etc/modules. Essayez, et vérifiez avec la commande lsmod après redémarrage de la machine.**  
 
 
+## Exercice 4: Exécution de commandes en différé : at et cron  
+
+**1. Programmez une tâche qui aﬀiche un rappel pour la réunion qui aura lieu dans 3 minutes. Vérifiez entre temps que la tâche est bien programmée.**  
+
+**2. Est-ce que le message s’est aﬀiché? Si la réponse est non, essayez de trouver la cause du problème (par exemple en vous aidant des logs, du manuel...)**  
+
+**3. Pour tester le fonctionnement de cron, commencez par programmer l’exécution d’une tâche simple, l’aﬀichage de “Il faut réviser pour l’examen!”, toutes les 3 minutes.**  
+
+**4. Programmez l’exécution d’une commande tous les jours, toute l’année, tous les quarts d’heure**  
+
+**5. Programmez l’exécution d’une commande toutes les cinq minutes à partir de 2 (2, 7, 12, etc.) à 18 heures les 1er et 15 du mois :**  
+
+**6. Programmez l’exécution d’une commande du lundi au vendredi à 17 heures**  
+
+**7. Modifiez votre crontab pour que les messages ne soient plus envoyés par mail, mais redirigés dans un fichier de log situé dans votre dossier personnel**  
+
+**8. Videz votre crontab**  
+
+
+## Exercice 5: Surveillance de l’activité du système  
+
+**1. Dans la console virtuelle tty1, lancez la commande htop, puis tapez la commande w dans tty2. Qu’aﬀiche cette commande?**  
+
+**2. Comment aﬀicher l’historique des dernières connexions à la machine?**  
+
+**3. Quelle commande permet d’obtenir la version du noyau?**  
+
+**4. Comment récupérer toutes les informations sur le processeur, au format JSON?**  
+
+**5. Comment obtenir la liste des derniers démarrages de la machine avec la commande journalctl? Comment aﬀicher tout ce qu’il s’est passé sur la machine lors de l’avant-dernier boot?**  
+
+**6. Comment obtenir la liste des derniers démarrages de la machine avec la commande journalctl?**  
+
+**7. Faites en sortes que lors d’une connexion à la machine, les utilisateurs soient prévenus par un message à l’écran d’une maintenance le 26 mars à minuit.**  
+
+**8. Ecrivez un script bash qui permet de calculer le k-ième nombre de Fibonacci : Fk = Fk−1 + 
+Fk−2, avec F0 = F1 = 1.  
+Lancez le calcul de F100 puis lancez la commande tload depuis un autre terminal virtuel. Que constatez-vous?   Interrompez ensuite le calcul avec CTRL+C et observez la conséquence sur l’aﬀichage de tload.**  
+
+
