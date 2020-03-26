@@ -268,7 +268,7 @@ echo $texte>>./tmp
 Pour compiler : `chmod u+x recopie.sh`. Pour lancer le script : `./recopie.sh`. Tous le etxte tappé par l'utlisateur sera stocké dans le fichier tmp.  
 
 **2. Lancez votre script et appuyez sur CTRL+Z. Que se passe-t-il? Comment faire pour que le script poursuive son exécution?**  
-Après un CTRL+Z, on obtient la ligne suivante : `[1]+Stopped	./recopie.sh`. Le CTRL+Z met en pause le processus courant (recopie.sh) et redonne accès au terminal.  
+Après un CTRL+Z, on obtient la ligne suivante : `[1]+Stopped	./recopie.sh`. Le CTRL+Z met en pause le processus courant (recopie.sh) et redonne accès au terminal. Il détruit les sorties en attente : les lignes rentrées avant ne sont pas recopiées dans tmp et ne sont pas sauvegardées.  
 Le `[1]` correspond au numero du job stoppé. Si on veut voir tous les jobs stoppés par CTRL+Z : faire `jobs`.  
 Pour reprendre le processus, il y a deux solutions :  
 - Faire `bg %1` : cela permet à l’exécution de continuer en arrière-plan (BackGround). Le %1 correspond au numero du processus stoppé
@@ -290,6 +290,8 @@ exit permet de sortir du processus.
 La commande trap s'écrit sous la forme suivante : trap "commande(s)" Numéro(s)_signal.  
 
 **5. Testez le nouveau comportement de votre script en utilisant d’une part les raccourcis clavier, d’autre part la commande kill**  
+Le script fonctionne avec les nouveaux raccourcis clavier. On ne peut pas utiliser kill car n'est que recopié dans le fichier tmp et pas considéré comme une commande.  
+La commande `kill pid` tue le processus dont l'identifiant a été sélectionné. Pour obtenir l'identifiant pid d'un processus : faire `pidof nom_processus`. `kill` a plusieurs options (dont CTRL+Z et CTRL+C). On peut choisir la façon de l'exécuter avec la forme : `kill -s num_signal`.  
 
 **6. Relancez votre script et faites immédiatement un CTRL+C : vous obtenez un message d’erreur vous indiquant que le fichier tmp.txt n’existe pas. A l’aide de la commande interne test, corrigez votre script pour que ce message n’apparaisse plus.**  
 
