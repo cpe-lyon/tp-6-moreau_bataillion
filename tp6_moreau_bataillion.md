@@ -303,7 +303,14 @@ trap "echo 'Impossible de me placer en arrière-plan'" 20
 read -p 'Saisissez du texte:' texte
 echo $texte>>./tmp
 ```
-La commande interne test est symbolisée ici par les crochets du if. Le -e vérifie que le fichier tmp existe bien avant de pouvoir mettre en place la redirection de signaux grâce à trap.
+La commande interne test est symbolisée ici par les crochets du if. Le -e vérifie que le fichier tmp existe bien avant de pouvoir mettre en place la redirection de signaux grâce à trap.  
 
 
+## Exercice 7. Sauvegardes, tar  
+
+**1. Placez-vous dans votre dossier personnel, puis créez deux archives de ce dossier : une archive1.tar en indiquant * comme argument, et une archive2.tar en indiquant . comme argument. Comparez les deux archives. Que constatez-vous? Expliquez.**  
+
+**2. Quel est le problème avec la commande tar cvf archive.tar * .*?**  
+
+**3. Créez un dossier test contenant trois fichier tata, toto et tutu puis retirez les droits d’exécution sur ce dossier. Créez une archive de ce dossier. Que constatez-vous? Expliquez.**  
 
