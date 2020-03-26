@@ -54,8 +54,9 @@ mount /dev/cdrom /mnt/cdrom
 cd /mnt/cdrom
 ls
 ```
-Pour /dev/cdrom, faire tab pour trouver le nom complet du cdrom à disposition (cdrom, cdrom2...). Avec le résultat de ls, trouver le nom du script pour installer les additions invités. Puis, le lancer:
+Pour /dev/cdrom, faire tab pour trouver le nom complet du cdrom à disposition (cdrom, cdrom2...). Avec le résultat de ls, trouver le nom du script pour installer les additions invités. Puis, le lancer, toujours en root:
 `./VBoxLinuxAdditions.run`
+Redémarrer la VM avec reboot.
 
 - Mettre en place le dossier partagé
 Sous windows, créer un dossier shared_folder.  
