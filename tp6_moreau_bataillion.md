@@ -309,6 +309,15 @@ La commande interne test est symbolisée ici par les crochets du if. Le -e véri
 ## Exercice 7. Sauvegardes, tar  
 
 **1. Placez-vous dans votre dossier personnel, puis créez deux archives de ce dossier : une archive1.tar en indiquant * comme argument, et une archive2.tar en indiquant . comme argument. Comparez les deux archives. Que constatez-vous? Expliquez.**  
+```
+tar -cvf archive1.tar *
+tar -cvf archive2.tar .
+```
+- -c : crée l'archive  
+- -v : active le mode verbeux qui affiche tout ce que fait la compression  
+- -f : utilise l'argument donné en paramètre comme élément à archiver  
+
+L'archive avec * comme argument fait une copie de tous les fichiers et dossiers présents dans notre dossier personnel. Au contraire, l'archive avec . comme argument fait une copie de l'ensemble des fichiers et dossiers (même ceux cachés, ceux de configuration...) accessible depuis notre dossier personnel.  
 
 **2. Quel est le problème avec la commande tar cvf archive.tar * .*?**  
 
