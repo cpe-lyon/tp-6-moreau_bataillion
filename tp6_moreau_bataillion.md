@@ -260,10 +260,22 @@ On peut observer que tant que le processus était actif, la charge moyenne du sy
 **La commande interne trap permet de redéfinir des gestionnaires pour les signaux reçus par un processus. Un cas d’utilisation typique est la suppression des fichiers temporaires créés par un script lorsque celui-ci est interrompu.**  
 
 **1. Commencez par écrire un script qui recopie dans un fichier tmp.txt chaque ligne saisie au clavier par l’utilisateur**  
+```
+#! /bin/bash
+read -p 'Saisissez du texte:' texte
+echo $texte>>./tmp
+```
+Pour compiler : `chmod u+x recopie.sh`. Pour lancer le script : `./recopie.sh`. Tous le etxte tappé par l'utlisateur sera stocké dans le fichier tmp.  
 
 **2. Lancez votre script et appuyez sur CTRL+Z. Que se passe-t-il? Comment faire pour que le script poursuive son exécution?**  
+Après un CTRL+Z, on obtient la ligne suivante : `[1]+Stopped	./recopie.sh`. Le CTRL+Z met en pause le processus courant (recopie.sh) et redonne accès au terminal.  
+Le `[1]` correspond au numero du job stoppé. Si on veut voir tous les jobs stoppés par CTRL+Z : faire `jobs`.  
+Pour reprendre le processus, il y a deux solutions :  
+- Faire `bg %1` : cela permet à l’exécution de continuer en arrière-plan (BackGround). Le %1 correspond au numero du processus stoppé
+- Faire `fg %1` : cela permet au processus de reprendre en avant-plan (ForeGround). On perd de nouveau la main sur le terminal et tout ce qu’on écrit sera recopié dans tmp. C’est la solution que l’on choisit.  
 
 **3. Toujours pendant l’exécution du script, appuyez sur CTRL+C. Que se passe-t-il?**  
+CTRL+C : arrête le processus courant comme un kill. Aucune ligne d’information. Impossible de reprendre le processus.
 
 **4. Modifiez votre script pour redéfinir les actions à effectuer quand le script reçoit les signaux SIGTSTP (= CTRL+Z) et SIGINT (= CTRL+C) : dans le premier cas, il doit aﬀicher ”Impossible de me placer en arrière-plan”, et dans le second cas, il doit aﬀicher ”OK, je fais un peu de ménage avant” avant de supprimer le fichier temporaire et terminer le script.**  
 
