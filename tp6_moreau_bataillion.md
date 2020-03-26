@@ -294,6 +294,16 @@ Le script fonctionne avec les nouveaux raccourcis clavier. On ne peut pas utilis
 La commande `kill pid` tue le processus dont l'identifiant a été sélectionné. Pour obtenir l'identifiant pid d'un processus : faire `pidof nom_processus`. `kill` a plusieurs options (dont CTRL+Z et CTRL+C). On peut choisir la façon de l'exécuter avec la forme : `kill -s num_signal`.  
 
 **6. Relancez votre script et faites immédiatement un CTRL+C : vous obtenez un message d’erreur vous indiquant que le fichier tmp.txt n’existe pas. A l’aide de la commande interne test, corrigez votre script pour que ce message n’apparaisse plus.**  
+```
+#! /bin/bash
+if [ -e ./tmp ]; then
+trap "echo 'OK, je fais un peu de ménage avant' ; rm ./tmp ; exit" 2
+fi
+trap "echo 'Impossible de me placer en arrière-plan'" 20
+read -p 'Saisissez du texte:' texte
+echo $texte>>./tmp
+```
+La commande interne test est symbolisée ici par les crochets du if. Le -e vérifie que le fichier tmp existe bien avant de pouvoir mettre en place la redirection de signaux grâce à trap.
 
 
 
