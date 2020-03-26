@@ -323,4 +323,12 @@ L'archive avec * comme argument fait une copie de tous les fichiers et dossiers 
 Elle copie plusieurs fois les mêmes éléments. * et .* sont considérés comme deux éléments différents à archiver.
 
 **3. Créez un dossier test contenant trois fichier tata, toto et tutu puis retirez les droits d’exécution sur ce dossier. Créez une archive de ce dossier. Que constatez-vous? Expliquez.**  
+```
+mkdir test
+touch ./test/tutu ./test/tata ./test/toto
+chmod a-x ./test
+tar -cvf archive_test.tar ./test
+```
+On ne peut pas créer cette archive. Le droit d'exécution pour un dossier correspond au droit de traverser le répertoire, c'est à dire le droit d'accéder au contenu du répertoire. La commande tar ne peut donc pas s'exécuter correctement : elle ne peut accéder au contenu du dossier test.
+
 
