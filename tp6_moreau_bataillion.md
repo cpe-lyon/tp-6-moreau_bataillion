@@ -45,8 +45,25 @@ Avec `sudo fdisk -l` on constate qu’il s’est bien rajouté une clef (sdc1) l
 On va créer un point de montage pour la clef. On crée le dossier `/media/usb` comme dossier de montage et on monte la clef grâce à `mount /dev/sdc1 /media/usb`.
 
 **9. Créez un dossier partagé entre votre VM et votre système hôte (rem. il peut être nécessaire d’installer les Additions invité de VirtualBox**  
+- Installer les additions invités:  
+Ajouter l'image iso des additions invités précédemment téléchargée au disque contrôleur IDE (confi, stockage.  
+En root faire:
+```
+mkdir /mnt/cdrom
+mount /dev/cdrom /mnt/cdrom
+cd /mnt/cdrom
+ls
+```
+Pour /dev/cdrom, faire tab pour trouver le nom complet du cdrom à disposition (cdrom, cdrom2...). Avec le résultat de ls, trouver le nom du script pour installer les additions invités. Puis, le lancer:
+`./VBoxLinuxAdditions.run`
 
-
+- Mettre en place le dossier partagé
+Sous windows, créer un dossier shared_folder.  
+VM éteinte, dans les config de la VM, onglet Dossiers partagés, créer un nouveau dossier partagé dont le chemin est celui de shared_folder. Cocher configuration permanente.  
+Allumer la VM, créer un dossier point de montage /shared_folder_VM. Se placer en `sudo su`, puis taper:  
+`mount -t vboxsf shared_folder /shared_folder_VM`  
+Pour que le dossier soit monté automatiquement à l'allumage de la VM, ajouter dans /etc/fstab la ligne:  
+shared_folder   /shared_folder_VM   vboxsf   defaults  0   0  
 
 ## Exercice 2. Personnalisation de GRUB  
 
