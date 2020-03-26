@@ -320,6 +320,7 @@ tar -cvf archive2.tar .
 L'archive avec * comme argument fait une copie de tous les fichiers et dossiers présents dans notre dossier personnel. Au contraire, l'archive avec . comme argument fait une copie de l'ensemble des fichiers et dossiers (même ceux cachés, ceux de configuration...) accessible depuis notre dossier personnel.  
 
 **2. Quel est le problème avec la commande tar cvf archive.tar * .*?**  
+Elle copie plusieurs fois les mêmes éléments. * et .* sont considérés comme deux éléments différents à archiver.
 
 **3. Créez un dossier test contenant trois fichier tata, toto et tutu puis retirez les droits d’exécution sur ce dossier. Créez une archive de ce dossier. Que constatez-vous? Expliquez.**  
 
