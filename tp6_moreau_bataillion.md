@@ -44,7 +44,6 @@ Dans config, usb, on rajoute un filtre usb vide, ce qui va permettre de lire tou
 Avec `sudo fdisk -l` on constate qu’il s’est bien rajouté une clef (sdc1) lorsqu’on branche une clef à la machine hôte.  
 On va créer un point de montage pour la clef. On crée le dossier `/media/usb` comme dossier de montage et on monte la clef grâce à `mount /dev/sdc1 /media/usb`.
 
-
 **9. Créez un dossier partagé entre votre VM et votre système hôte (rem. il peut être nécessaire d’installer les Additions invité de VirtualBox**  
 
 
@@ -100,7 +99,19 @@ menuentry 'Redémarrage du système' {
 ```
 https://doc.ubuntu-fr.org/tutoriel/grub2_parametrage_manuel#menu_arret_du_systeme
 
-**9. Configurer GRUB pour que le clavier soit en français**
+**9. Configurer GRUB pour que le clavier soit en français**  
+```
+sudo mkdir /boot/grub/layouts
+sudo grub-kbdcomp -o /boot/grub/layouts/fr.gkb fr
+```
+Ajouter `GRUB_TERMINAL_INPUT=at_keyboard` au fichier /etc/default/grub
+Ajouter à /etc/grub.d/40_custom :
+```
+# Clavier fr
+insmod keylayouts
+keymap fr
+```
+https://doc.ubuntu-fr.org/tutoriel/grub2_parametrage_manuel#clavier_francais
 
 ## Exercice 3. Noyau 
 
