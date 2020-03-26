@@ -278,6 +278,16 @@ Pour reprendre le processus, il y a deux solutions :
 CTRL+C : arrête le processus courant comme un kill. Aucune ligne d’information. Impossible de reprendre le processus.
 
 **4. Modifiez votre script pour redéfinir les actions à effectuer quand le script reçoit les signaux SIGTSTP (= CTRL+Z) et SIGINT (= CTRL+C) : dans le premier cas, il doit aﬀicher ”Impossible de me placer en arrière-plan”, et dans le second cas, il doit aﬀicher ”OK, je fais un peu de ménage avant” avant de supprimer le fichier temporaire et terminer le script.**  
+On fait d'abord kill -l pour obtenir les chiffres correspondant aux signaux. CTRL+Z=SIGTSP=20 ; CTRL+C=SIGINT=2.  
+```
+#! /bin/bash
+trap "echo 'OK, je fais un peu de ménage avant' ; rm ./tmp ; exit" 2
+trap "echo 'Impossible de me placer en arrière-plan'" 20
+read -p 'Saisissez du texte:' texte
+echo $texte>>./tmp
+```
+exit permet de sortir du processus.  
+La commande trap s'écrit sous la forme suivante : trap "commande(s)" Numéro(s)_signal.  
 
 **5. Testez le nouveau comportement de votre script en utilisant d’une part les raccourcis clavier, d’autre part la commande kill**  
 
