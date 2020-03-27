@@ -175,7 +175,7 @@ https://doc.ubuntu-fr.org/tutoriel/grub2_parametrage_manuel#clavier_francais
 ```
 **Les lignes 4, 7 et 10 doivent commencer par une tabulation.**  
 
-**4. Compilez le module à l’aide de la commande make, puis installez-le à l’aide de la commande make install.  
+**4. Compilez le module à l’aide de la commande `make`, puis installez-le à l’aide de la commande `make install`.  
 Le module est installé dans le dossier spécifié à la ligne 10.**  
 ```
 make		//compilation de hello.c
@@ -189,7 +189,7 @@ tail /var/log/syslog		//Regarder le journal du noyau : on voit que init_module()
 lsmod | grep hello   		//lsmod liste les modules chargés dans la VM, avec grep on ne sélectionne que le module hello. Le  				    module ayant chargé, il est bien présent dans la liste
 ```
 
-**6. Utilisez la commande modinfo pour obtenir des informations sur le module hello.ko; vous devriez notamment voir les informations figurant dans le fichier C.**  
+**6. Utilisez la commande `modinfo` pour obtenir des informations sur le module hello.ko; vous devriez notamment voir les informations figurant dans le fichier C.**  
 `modinfo hello` donne des infos sur le module : filename, version, description, author, license, srcversion, depends, retpoline, name, vermagic.
 
 **7. Déchargez le module; vérifiez dans le journal du noyau que le message ”La fonction cleanup_module() est appelée” a bien été inscrit, synonyme que le module a été déchargé; confirmez avec la commande lsmod.**  
@@ -200,6 +200,7 @@ lsmod | grep hello   		//lsmod liste les modules chargés dans la VM, avec grep 
 ```
 
 **8. Pour que le module soit chargé automatiquement au démarrage du système, il faut l’inscrire dans le fichier /etc/modules. Essayez, et vérifiez avec la commande lsmod après redémarrage de la machine.**  
+Dans /etc/modules, ajouter : hello. Redémarrer la VM avec `reboot`. Puis vérifier avec `lsmod | grep hello` que le module hello a bien été rechargé au démarrage automatiquement.
 
 
 ## Exercice 4: Exécution de commandes en différé : at et cron  
