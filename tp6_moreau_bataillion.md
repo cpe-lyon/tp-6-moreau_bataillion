@@ -220,6 +220,10 @@ Nous cherchons maintenant à ne plus recevoir la notification par mail, mais dir
 Il faut préter attention à la place des côtes! Attention : ce qui est placé dans des guillemets doubles est **interprété**.
 
 **3. Pour tester le fonctionnement de cron, commencez par programmer l’exécution d’une tâche simple, l’aﬀichage de “Il faut réviser pour l’examen!”, toutes les 3 minutes.**  
+Site utile pour tester la crontab: https://crontab.guru/
+Pour éditer une crontab : `crontab -e`.  
+Y écrire : `*/3 * * * * echo 'Il faut réviser pour l’examen!'>/dev/tty1`.  
+Une crontab est organisée comme suit : minute heure num_jour_du_mois num_mois num_jour_de_la_semaine. Lorsqu'un champ est rempli d'une *, cela signifie que cela peut prendre n'importe quelle valeur. Le */3 signifie toutes les minutes qui sont divisibles par 3; les autres * signifient que cela arriver toutes les heures, tous les jours, tous les mois, tous les ans.
 
 **4. Programmez l’exécution d’une commande tous les jours, toute l’année, tous les quarts d’heure**  
 
