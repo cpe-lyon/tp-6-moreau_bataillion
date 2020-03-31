@@ -206,14 +206,16 @@ Dans /etc/modules, ajouter : hello. Redémarrer la VM avec `reboot`. Puis vérif
 ## Exercice 4: Exécution de commandes en différé : at et cron  
 
 **1. Programmez une tâche qui aﬀiche un rappel pour la réunion qui aura lieu dans 3 minutes. Vérifiez entre temps que la tâche est bien programmée.**  
-`echo ‘echo ”Réunion Rappel”’ | at now +3 minutes` : met en place le rappel  
+`echo ‘echo Réunion Rappel’ | at now +3 minutes` : met en place le rappel  
 `atq` : affiche toutes les taches programmées dont celle précédente.  
 `atrm 1` : remove le job 1 (tâche 1 a effectuer retirée de la liste)  
 
 **2. Est-ce que le message s’est aﬀiché? Si la réponse est non, essayez de trouver la cause du problème (par exemple en vous aidant des logs, du manuel...)**  
-Ne marche pas selon le journal de log : `exec failed for mail command : No such file or directory`.  
-Il faut trouver le chemin de notre terminal actuel pour que le résultat de la commande arrive au bon endroit. Avec `tty`, on obtient `/dev/tty1`.  
-`echo ‘echo ”Réunion Rappel”’>/dev/tty1 | at now +3 minutes`  
+Ne marche pas selon le journal de log : `exec failed for mail command : No such file or directory`. La commande `at` n'envoie pas ses sorties dans le terminal mais par mail à l'utilisateur. Ainsi, l'utilisateur pourra consulter ses mails à n'importe quel moment et ne pas râter l'envoie de la notification par at car il n'était pas connecté à ce moment là. La commande s'exécute même si l'utilisateur n'est pas loggué.  
+On installe donc un paquet de gestion de mails : `sudo apt install mailutils`. On peut consulter ses mails avec `mail`.On navigue ensuite grâce aux numéros des mails.  
+Nous cherchons maintenant à ne plus recevoir la notification par mail, mais directement sur le terminal. Il faut d'abord trouver le chemin de notre terminal actuel pour que le résultat de la commande arrive au bon endroit. Avec `tty`, on obtient `/dev/tty1`, c'est le nom de notre terminal. On redirige donc la commande vers ce terminal:  
+`echo ‘echo Réunion Rappel>/dev/tty1’ | at now +3 minutes`.  
+Il faut préter attention à la place des côtes! Attention : ce qui est placé dans des guillemets doubles est **interprété**.
 
 **3. Pour tester le fonctionnement de cron, commencez par programmer l’exécution d’une tâche simple, l’aﬀichage de “Il faut réviser pour l’examen!”, toutes les 3 minutes.**  
 
