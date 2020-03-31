@@ -217,24 +217,33 @@ Ne marche pas selon le journal de log : `exec failed for mail command : No such 
 On installe donc un paquet de gestion de mails : `sudo apt install mailutils`. On peut consulter ses mails avec `mail`.On navigue ensuite grâce aux numéros des mails.  
 Nous cherchons maintenant à ne plus recevoir la notification par mail, mais directement sur le terminal. Il faut d'abord trouver le chemin de notre terminal actuel pour que le résultat de la commande arrive au bon endroit. Avec `tty`, on obtient `/dev/tty1`, c'est le nom de notre terminal. On redirige donc la commande vers ce terminal:  
 `echo ‘echo Réunion Rappel>/dev/tty1’ | at now +3 minutes`.  
-Il faut préter attention à la place des côtes! Attention : ce qui est placé dans des guillemets doubles est **interprété**.
+Il faut préter attention à la place des côtes! Attention : ce qui est placé dans des guillemets doubles est **interprété**.  
 
 **3. Pour tester le fonctionnement de cron, commencez par programmer l’exécution d’une tâche simple, l’aﬀichage de “Il faut réviser pour l’examen!”, toutes les 3 minutes.**  
-Site utile pour tester la crontab: https://crontab.guru/
+Site utile pour tester la crontab: https://crontab.guru/  
+
 Pour éditer une crontab : `crontab -e`.  
-Y écrire : `*/3 * * * * echo 'Il faut réviser pour l’examen!'>/dev/tty1`.  
-Une crontab est organisée comme suit : minute heure num_jour_du_mois num_mois num_jour_de_la_semaine. Lorsqu'un champ est rempli d'une *, cela signifie que cela peut prendre n'importe quelle valeur. Le */3 signifie toutes les minutes qui sont divisibles par 3; les autres * signifient que cela arriver toutes les heures, tous les jours, tous les mois, tous les ans.
+Y écrire : `*/3 * * * * echo 'Il faut réviser pour l’examen!'>/dev/tty1`  
+Une crontab est organisée comme suit : minute heure num_jour_du_mois num_mois num_jour_de_la_semaine. Lorsqu'un champ est rempli d'une *, cela signifie que cela peut prendre n'importe quelle valeur. Le */3 signifie toutes les minutes qui sont espacées de 3 (step value); les autres * signifient que cela arrivera toutes les heures, tous les jours, tous les mois, tous les ans.  
 
 **4. Programmez l’exécution d’une commande tous les jours, toute l’année, tous les quarts d’heure**  
+Editer une crontab : `crontab -e`.  
+Y écrire : `*/15 * * * * touch fichier_crontab`  
 
 **5. Programmez l’exécution d’une commande toutes les cinq minutes à partir de 2 (2, 7, 12, etc.) à 18 heures les 1er et 15 du mois :**  
+`2/5 18 1,15 * * echo 'Pourquoi cet horaire'>/dev/tty1`  
+On utilise 2/5 : A partir de la deuxième minute avec un espacement de 5 minutes entre chaque. On utilise 1,15 : les 1er et 15ème du mois.  
 
 **6. Programmez l’exécution d’une commande du lundi au vendredi à 17 heures**  
+`00 17 * * 1-5 echo 'C'est un jour de semaine!'>/dev/tty1`  
+On utilise 1-5 : du 1er au 5eme jour de la semaine.  
 
 **7. Modifiez votre crontab pour que les messages ne soient plus envoyés par mail, mais redirigés dans un fichier de log situé dans votre dossier personnel**  
+`*/3 * * * * echo 'Il faut réviser pour l’examen!'>~/fichier_log`
+Il faut appliquer cette correction à chaque ligne. On avait précédemment une redirection vers le terminal.
 
 **8. Videz votre crontab**  
-
+`contab -r`
 
 ## Exercice 5: Surveillance de l’activité du système  
 
