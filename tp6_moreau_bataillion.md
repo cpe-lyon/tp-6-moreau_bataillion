@@ -239,7 +239,7 @@ On utilise 2/5 : A partir de la deuxième minute avec un espacement de 5 minutes
 On utilise 1-5 : du 1er au 5eme jour de la semaine.  
 
 **7. Modifiez votre crontab pour que les messages ne soient plus envoyés par mail, mais redirigés dans un fichier de log situé dans votre dossier personnel**  
-`*/3 * * * * echo 'Il faut réviser pour l’examen!'>~/fichier_log`
+`*/3 * * * * echo 'Il faut réviser pour l’examen!'>>~/fichier_log`
 Il faut appliquer cette correction à chaque ligne. On avait précédemment une redirection vers le terminal.
 
 **8. Videz votre crontab**  
