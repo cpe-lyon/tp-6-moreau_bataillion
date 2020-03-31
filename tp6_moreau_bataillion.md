@@ -205,6 +205,8 @@ Dans /etc/modules, ajouter : hello. Redémarrer la VM avec `reboot`. Puis vérif
 
 ## Exercice 4: Exécution de commandes en différé : at et cron  
 
+On utilise at pour un évènement ponctuel et cron pour plusieurs évènements répétitifs (toutes les heures, tous les 5 jours, tous les vendredi, tous les 8 mois, tous les ans...).  
+
 **1. Programmez une tâche qui aﬀiche un rappel pour la réunion qui aura lieu dans 3 minutes. Vérifiez entre temps que la tâche est bien programmée.**  
 `echo ‘echo Réunion Rappel’ | at now +3 minutes` : met en place le rappel  
 `atq` : affiche toutes les taches programmées dont celle précédente.  
